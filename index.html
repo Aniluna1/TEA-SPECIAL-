@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teetee's Birthday 🎂</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    body {
+      margin: 0;
+      padding: 30px 20px;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #ffe0f0, #fff5fb);
+      color: #333;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    h1 {
+      font-size: 36px;
+      color: #e91e63;
+      margin-bottom: 20px;
+    }
+    #countdown {
+      font-size: 22px;
+      margin-bottom: 30px;
+      color: #d63384;
+    }
+    .step, #gift-box, #card {
+      display: none;
+      margin-top: 30px;
+      animation: fadeIn 1s ease;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    button {
+      background: #ff69b4;
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #f73378;
+    }
+    #gift-box img {
+      width: 140px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    #gift-box img:hover {
+      transform: scale(1.1);
+    }
+    #card {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: auto;
+      color: #444;
+      white-space: pre-wrap;
+      font-size: 17px;
+      line-height: 1.7;
+      position: relative;
+    }
+    .sparkle {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: url('https://cdn.pixabay.com/photo/2016/12/19/12/51/snowflake-1918794_1280.png') repeat;
+      background-size: 80px;
+      animation: sparkle 2s ease;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .confetti {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #f50057;
+      animation: fall 3s infinite;
+      border-radius: 50%;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+    .balloon {
+      position: absolute;
+      bottom: -100px;
+      width: 40px;
+      height: 60px;
+      background: pink;
+      border-radius: 50% 50% 45% 45%;
+      animation: floatUp 10s infinite ease-in;
+      z-index: 0;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-120vh); opacity: 0; }
+    }
+    #banner {
+      position: relative;
+      margin: 20px auto 10px;
+    }
+    #banner img {
+      max-width: 300px;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="sparkle" id="sparkleEffect"></div>
+  <div class="confetti" id="confetti"></div>
+  <h1>🎉 Happy Birthday My Bestie, Teetee(Lisa) 💖</h1>
+  <div id="countdown"></div>
+  <div id="step1" class="step">
+    <p>Hey Teetee, today is not just any day...</p>
+    <button onclick="showStep(2)">Next</button>
+  </div>
+  <div id="step2" class="step">
+    <p>It’s the day you turn 18 — Little Neck Breaker 🎉</p>
+    <button onclick="showStep(3)">Next</button>
+  </div>
+  <div id="step3" class="step">
+    <p>I made something sweet just for you 🎁</p>
+    <button onclick="showStep(4)">Reveal</button>
+  </div>
+  <div id="gift-box">
+    <p>Tap the box to open your card ✨</p>
+    <img src="https://cdn-icons-png.flaticon.com/512/3456/3456426.png" onclick="openCard()" />
+  </div>
+  <div id="card">
+    <div id="banner">
+      <img src="https://cdn.pixabay.com/photo/2021/07/27/14/51/banner-6496984_1280.png" alt="Birthday Banner">
+    </div>
+    <h2>To My Bestie, Lisa 💌</h2>
+    <p>
+      To My Bestie, Teetee 💌
+
+Happy 18th Birthday, Lisa! 🎉🎂
+
+From our random late-night talks to the times you act all bossy
+(and slightly evil when breaking my neck 😩), every moment with you is unforgettable.
+
+You've been my loudest cheerleader, my softest pillow, and the reason
+my autocorrect embarrasses me in public 😭 (Dumbo to Darling? Really?!).
+
+Even when you're annoying me to death, you're still a bit cute. Just a bit though.
+Don't let it get to your head.
+
+I’m lucky to call you my bestie — my Teetee,
+the girl who makes life hilarious and chaotic in the best way.
+
+May this 18th year bring you more sass, more fun,
+and slightly less neck-breaking energy. Just slightly.
+
+Love ya always,
+— Aniket 🫶
+    </p>
+  </div>
+  <script>
+    function updateCountdown() {
+      const eventDate = new Date("July 22, 2025 00:00:00").getTime();
+      const now = new Date().getTime();
+      const diff = eventDate - now;
+      if (diff <= 0) {
+        document.getElementById("countdown").innerText = "🎉 It's your day, Cutie!";
+        return;
+      }
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      document.getElementById("countdown").innerText =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    function showStep(n) {
+      document.getElementById("step" + (n - 1)).style.display = "none";
+      if (n === 4) {
+        document.getElementById("gift-box").style.display = "block";
+      } else {
+        const nextStep = document.getElementById("step" + n);
+        nextStep.style.display = "block";
+        nextStep.style.animation = "fadeIn 1s ease";
+      }
+    }
+
+    function openCard() {
+      const today = new Date();
+      const unlockDate = new Date("July 22, 2025");
+      if (
+        today.getFullYear() === unlockDate.getFullYear() &&
+        today.getMonth() === unlockDate.getMonth() &&
+        today.getDate() === unlockDate.getDate()
+      ) {
+        playSparkle();
+        document.getElementById("gift-box").style.display = "none";
+        document.getElementById("card").style.display = "block";
+        addFloatingBalloons();
+      } else {
+        alert("Too early! Come back on your birthday 💖");
+      }
+    }
+
+    function playSparkle() {
+      const sparkle = document.getElementById("sparkleEffect");
+      sparkle.style.animation = "none";
+      sparkle.offsetHeight;
+      sparkle.style.animation = "sparkle 2s ease";
+    }
+
+    function launchConfetti() {
+      const confettiContainer = document.getElementById("confetti");
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti-piece");
+        confetti.style.left = Math.random() * 100 + "%";
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+        confetti.style.animationDuration = (2 + Math.random() * 2) + "s";
+        confettiContainer.appendChild(confetti);
+      }
+    }
+
+    function addFloatingBalloons() {
+      for (let i = 0; i < 20; i++) {
+        const balloon = document.createElement("div");
+        balloon.classList.add("balloon");
+        balloon.style.left = Math.random() * 100 + "%";
+        balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 70%)`;
+        balloon.style.animationDuration = (5 + Math.random() * 3) + "s";
+        document.body.appendChild(balloon);
+      }
+    }
+
+    document.getElementById("step1").style.display = "block";
+    window.onload = () => {
+      playSparkle();
+      launchConfetti();
+    };
+  </script>
+</body>
+</html>
